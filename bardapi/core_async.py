@@ -39,6 +39,8 @@ class BardAsync:
     Bard class for interacting with the Bard API using httpx[http2]
     """
 
+    SNlM0e = None
+
     def __init__(
         self,
         token: Optional[str] = None,
