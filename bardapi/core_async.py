@@ -8,6 +8,7 @@ import base64
 from typing import Optional
 from re import search
 from httpx import AsyncClient
+import asyncio
 
 try:
     from deep_translator import GoogleTranslator
@@ -81,14 +82,14 @@ class BardAsync:
         self.cookie_dict = {"__Secure-1PSID": self.token}
         self.run_code = run_code or False
         self.google_translator_api_key = google_translator_api_key
-        self.SNlM0e = self._get_snim0e()
+        self.SNlM0e = asyncio.get_event_loop().run_until_complete(self._get_snim0e())
 
         if self.google_translator_api_key is not None:
             from langdetect import detect
             from deep_translator import GoogleTranslator
             from google.cloud import translate_v2 as translate
 
-    def _get_snim0e(self):
+    async def _get_snim0e(self):
         """
         Asynchronously retrieves the SNlM0e value from a specified URL.
 
@@ -107,7 +108,7 @@ class BardAsync:
                 "__Secure-1PSID value must end with a single dot. Enter correct __Secure-1PSID value."
             )
 
-        resp = self.client.get(
+        resp = await self.client.get(
             "https://bard.google.com/", timeout=self.timeout, follow_redirects=True
         )
         if resp.status_code != 200:
