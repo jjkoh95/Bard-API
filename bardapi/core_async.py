@@ -147,7 +147,7 @@ class BardAsync:
                 "Bard API Key must be provided as token argument or extracted from browser."
             )
 
-    async def _get_client(self, session: Optional[AsyncClient]) -> AsyncClient:
+    def _get_client(self, session: Optional[AsyncClient]) -> AsyncClient:
         """
         The _get_snim0e function is used to get the SNlM0e value from the Bard website.
 
