@@ -8,7 +8,6 @@ import base64
 from typing import Optional
 from re import search
 from httpx import AsyncClient
-import asyncio
 
 try:
     from deep_translator import GoogleTranslator
@@ -82,7 +81,7 @@ class BardAsync:
         self.cookie_dict = {"__Secure-1PSID": self.token}
         self.run_code = run_code or False
         self.google_translator_api_key = google_translator_api_key
-        self.SNlM0e = self._get_snim0e().__await__()
+        self.SNlM0e = self._get_snim0e()
 
         if self.google_translator_api_key is not None:
             from langdetect import detect
@@ -795,7 +794,7 @@ class BardAsync:
         image_name: Optional[str] = None,
         tool: Optional[Tool] = None,
     ) -> BardResult:
-        if not isinstance(self.SNlM0e, str):
+        if self.SNlM0e is not None and not isinstance(self.SNlM0e, str):
             self.SNlM0e = await self.SNlM0e
 
         if image is not None:
