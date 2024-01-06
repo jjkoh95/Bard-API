@@ -82,7 +82,7 @@ class BardAsync:
         self.cookie_dict = {"__Secure-1PSID": self.token}
         self.run_code = run_code or False
         self.google_translator_api_key = google_translator_api_key
-        self.SNlM0e = asyncio.get_event_loop().run_until_complete(self._get_snim0e())
+        self.SNlM0e = self._get_snim0e().__await__()
 
         if self.google_translator_api_key is not None:
             from langdetect import detect
